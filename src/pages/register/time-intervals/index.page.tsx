@@ -41,7 +41,6 @@ const timeIntervalsFormSchema = z.object({
     .transform((intervals) => {
       return intervals.map((interval) => {
         return {
-          weekDay: interval.weekDay,
           startTimeInMunites: convertTimeStringToMinutes(interval.startTime),
           endTimeInMunites: convertTimeStringToMinutes(interval.endTime),
         }
@@ -51,11 +50,12 @@ const timeIntervalsFormSchema = z.object({
       (intervals) => {
         return intervals.every(
           (interval) =>
-            interval.endTimeInMunites - 60 === interval.startTimeInMunites,
+            interval.endTimeInMinutes - 60 >= interval.startTimeInMinutes,
         )
       },
       {
-        message: 'O horário de termino deve ser 1h após o ínicio.',
+        message:
+          'O horário de termino deve ser pelo menos 1h distante do ínicio.',
       },
     ),
 })
