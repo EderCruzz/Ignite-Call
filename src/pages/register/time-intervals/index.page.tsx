@@ -41,8 +41,9 @@ const timeIntervalsFormSchema = z.object({
     .transform((intervals) => {
       return intervals.map((interval) => {
         return {
-          startTimeInMunites: convertTimeStringToMinutes(interval.startTime),
-          endTimeInMunites: convertTimeStringToMinutes(interval.endTime),
+          weekDay: interval.weekDay,
+          startTimeInMinutes: convertTimeStringToMinutes(interval.startTime),
+          endTimeInMinutes: convertTimeStringToMinutes(interval.endTime),
         }
       })
     })
@@ -80,7 +81,7 @@ export default function TimeIntervals() {
         { weekDay: 3, enabled: true, startTime: '09:00', endTime: '17:00' },
         { weekDay: 4, enabled: true, startTime: '09:00', endTime: '17:00' },
         { weekDay: 5, enabled: true, startTime: '09:00', endTime: '17:00' },
-        { weekDay: 6, enabled: true, startTime: '09:00', endTime: '17:00' },
+        { weekDay: 6, enabled: false, startTime: '09:00', endTime: '17:00' },
       ],
     },
   })
